@@ -200,9 +200,14 @@ class HomeassistantPlugin(
 
         _device_manufacturer = self._settings.get(["device_manufacturer"])
         _device_model = self._settings.get(["device_model"])
+        _device_firmware = self._settings.get(["firmware_version"])  # Buff testing
 
         _config_device = self._generate_device_config(
-            _node_id, _node_name, _device_manufacturer, _device_model
+            _node_id,
+            _node_name,
+            _device_manufacturer,
+            _device_model,
+            _firmware_version,  # Buff testing
         )
 
         ##~~ Configure Connected Sensor
@@ -455,7 +460,10 @@ class HomeassistantPlugin(
                 },
             )
             self._generate_sensor(
-                topic=_discovery_topic + "/sensor/" + _node_id + "_CHAMBER_TARGET/config",
+                topic=_discovery_topic
+                + "/sensor/"
+                + _node_id
+                + "_CHAMBER_TARGET/config",
                 values={
                     "name": _node_name + " Chamber Target",
                     "uniq_id": _node_id + "_CHAMBER_TARGET",
@@ -494,14 +502,19 @@ class HomeassistantPlugin(
         self.mqtt_publish(topic, payload, allow_queueing=True)
 
     def _generate_device_config(
-        self, _node_id, _node_name, _device_manufacturer, _device_model
+        self,
+        _node_id,
+        _node_name,
+        _device_manufacturer,
+        _device_model,
+        _firmware_version,  # buff test
     ):
         _config_device = {
             "ids": _node_id,
             "name": _node_name,
             "mf": _device_manufacturer,
             "mdl": _device_model,
-            "sw": "HomeAssistant Discovery for OctoPrint " + self._plugin_version,
+            "sw": _firmware_version,  # buff test
         }
         return _config_device
 
