@@ -207,7 +207,7 @@ class HomeassistantPlugin(
             _node_name,
             _device_manufacturer,
             _device_model,
-            _firmware_version,  # Buff testing
+            _device_firmware,  # Buff testing
         )
 
         ##~~ Configure Connected Sensor
